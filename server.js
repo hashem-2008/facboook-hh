@@ -3,8 +3,8 @@ const cors = require("cors");
 
 const app = express();
 
-const HOST = "127.0.0.1";
-const PORT = 3000;
+const HOST = "0.0.0.0";
+const PORT = process.env.PORT || 3000;
 
 const orders = [];
 
@@ -68,5 +68,5 @@ app.delete("/orders/:id", (req, res) => {
 });
 
 app.listen(PORT, HOST, () => {
-    console.log(`Server يعمل على http://${HOST}:${PORT}`);
+    console.log("Server يعمل على http://" + HOST + ":" + PORT);
 });
